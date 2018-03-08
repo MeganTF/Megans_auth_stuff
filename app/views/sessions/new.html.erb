@@ -1,6 +1,6 @@
-<h1>Register Account!</h1>
+<h1>Login!</h1>
 
-<%= form_for @user do |f| %>
+<%= form_for @user, url: login_path, method: :post do |f| %>
 <% flash[:errors] && flash[:errors].each do |err| %>
 <p><%= err %></p>
 <% end%>
@@ -15,9 +15,8 @@
 <%= f.password_field :password %>
 </div>
 
-<%= f.submit "Register"%>
-
-<p>Already have an account?</p>
-<%= link_to "Log in instead!", login_path %>
+<%= f.submit "Login"%>
+<p>Don't have an account yet?</p>
+<%= link_to "Register instead!", new_user_path %>
 
 <% end %>
