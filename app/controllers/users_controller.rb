@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root
+      redirect_to edit_user_path(@user)
 
     else
       flash[:errors] = @user.errors.full_messages
@@ -19,7 +19,14 @@ class UsersController < ApplicationController
   end
 
   def edit
-
+    if  @user = current_user
+    if @user.id !=params[:id].to_i
+      redirect_to edit_user_path(@user)
+    end
+  else
+    flash[:errors] = ["You must be logged in to go there."]
+    redirect_to login_path
+  end
   end
 
   def update
